@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Micro-frontend · runtime design system</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body { margin: 0; font-family: system-ui, sans-serif; color: #111; }
+      header { padding: 16px 24px; border-bottom: 1px solid #e3e3e3; }
+      nav a {
+        margin-right: 16px; text-decoration: none; color: #0a66c2; font-weight: 600;
+      }
+      .hint { color: #666; font-size: 13px; margin-top: 4px; }
+      main { min-height: 200px; }
+    </style>
+
+    <!--
+      The import-map is the single source of truth for WHERE each module lives.
+      react / react-dom are shared singletons (one instance for every app).
+      @mr/design-system is the LIVE design system — both apps point at the same
+      URL, so a redeploy of it updates both apps with no rebuild.
+    -->
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "react": "https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js",
+          "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js",
+          "react-dom/client": "https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js",
+          "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@6.0.3/lib/system/single-spa.min.js",
+          "@mr/root-config": "/mr-root-config.js",
+          "@mr/design-system": "http://localhost:8502/mr-design-system.js",
+          "@mr/accounts": "http://localhost:8500/mr-accounts.js",
+          "@mr/payments": "http://localhost:8501/mr-payments.js"
+        }
+      }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.15.1/dist/system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.15.1/dist/extras/amd.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/accounts">Accounts</a>
+        <a href="/payments">Payments</a>
+      </nav>
+      <div class="hint">
+        Two independently-built apps, one runtime-loaded design system. Switch
+        routes — the shell stays mounted, each app loads on demand.
+      </div>
+    </header>
+
+    <main id="single-spa-root"></main>
+
+    <script>
+      System.import("@mr/root-config");
+    </script>
+  </body>
+</html>
