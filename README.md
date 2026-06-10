@@ -4,7 +4,7 @@ Two **independently-built** React apps sharing **one design system loaded at run
 
 Built with [single-spa](https://single-spa.js.org/) + SystemJS import-maps. This is the pattern I use for banking front-ends where multiple teams ship on their own cadence and a shared component library must not become a release bottleneck.
 
-> 👤 Michele Radici — Senior Front-End Engineer · [LinkedIn](https://www.linkedin.com/in/michele-radici)
+> 👤 Michele Radici — Senior Front-End Developer · [LinkedIn](https://www.linkedin.com/in/michele-radici)
 
 ---
 
