@@ -2,7 +2,7 @@
   "name": "micro-frontend-design-system",
   "version": "1.0.0",
   "private": true,
-  "description": "Two single-spa React apps sharing one runtime-loaded design system — no version lock.",
+  "description": "Two single-spa React apps sharing one runtime-loaded design system, no version lock.",
   "workspaces": [
     "root-config",
     "design-system",

@@ -21,7 +21,7 @@ module.exports = (env, argv) => {
       ],
     },
     resolve: { extensions: [".js", ".jsx"] },
-    // React is provided at runtime by the host's import-map — never bundled here.
+    // React is provided at runtime by the host's import-map, never bundled here.
     externals: ["react", "react-dom", "react-dom/client"],
     devServer: {
       port: 8502,

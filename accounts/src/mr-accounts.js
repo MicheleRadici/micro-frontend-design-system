@@ -9,7 +9,7 @@ const lifecycles = singleSpaReact({
   React,
   ReactDOMClient,
   rootComponent: Root,
-  // Per-parcel error boundary: a crash here is contained — it does NOT take
+  // Per-parcel error boundary: a crash here is contained, it does NOT take
   // down the shell or the payments parcel.
   errorBoundary(err) {
     return (
