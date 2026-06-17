@@ -1,10 +1,10 @@
 # Micro-frontend + runtime-loaded design system
 
-Two **independently-built** React apps sharing **one design system loaded at runtime** — so a change to the design system reaches every app with **no version bump, no reinstall, and no rebuild of the consumers**.
+Two **independently-built** React apps sharing **one design system loaded at runtime**, so a change to the design system reaches every app with **no version bump, no reinstall, and no rebuild of the consumers**.
 
 Built with [single-spa](https://single-spa.js.org/) + SystemJS import-maps. This is the pattern I use for banking front-ends where multiple teams ship on their own cadence and a shared component library must not become a release bottleneck.
 
-> 👤 Michele Radici — Senior Front-End Developer · [LinkedIn](https://www.linkedin.com/in/michele-radici)
+> Michele Radici, Senior Front-End Developer · [LinkedIn](https://www.linkedin.com/in/michele-radici)
 
 ---
 
@@ -26,7 +26,7 @@ Treat the design system as a **runtime dependency**, not a build-time one:
 1. `npm start`, open the app, note the line *“Design system reports: design-system @ runtime v1.0.0”* in **both** apps.
 2. Edit `design-system/src/version.js`, bump the string.
 3. Rebuild **only** the design system: `npm run build -w design-system` (or just refresh in dev).
-4. Reload — both apps show the new value. Neither app was rebuilt.
+4. Reload. Both apps show the new value. Neither app was rebuilt.
 
 ---
 
@@ -35,14 +35,14 @@ Treat the design system as a **runtime dependency**, not a build-time one:
 ```
 root-config (shell, :9000)
 │  • serves index.html with the SystemJS import-map
-│  • registers apps by route, mounts/unmounts them — never unmounts the shell
+│  • registers apps by route, mounts/unmounts them, never unmounts the shell
 │
 ├─ accounts  (:8500)   single-spa React app, route /accounts
 ├─ payments  (:8501)   single-spa React app, route /payments
 └─ design-system (:8502)  Button + ThemeProvider, React externalized
 ```
 
-- **Lifecycle isolation:** each app owns its own `bootstrap → mount → unmount` and a per-parcel **error boundary** — a crash in one app does not take down the shell or the other app.
+- **Lifecycle isolation:** each app owns its own `bootstrap → mount → unmount` and a per-parcel **error boundary**. A crash in one app does not take down the shell or the other app.
 - **Runtime sharing:** `externals` in each app's `webpack.config.js` mark `react`, `react-dom`, `single-spa`, and `@mr/*` as external; the import-map resolves them at runtime.
 
 ## Run it
